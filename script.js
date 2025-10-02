@@ -17,7 +17,7 @@ function addBook() {
     return;
   }
 
-  // Create new row
+  // Create new table row
   const row = document.createElement('tr');
   row.innerHTML = `
     <td>${title}</td>
@@ -26,7 +26,7 @@ function addBook() {
     <td><button class="btn btn-danger btn-sm delete">Clear</button></td>
   `;
 
-  // Append row to table
+  // Append row to table body
   bookList.appendChild(row);
 
   // Clear input fields
@@ -34,22 +34,22 @@ function addBook() {
   authorInput.value = '';
   isbnInput.value = '';
 
-  // Focus back to title input for convenience
+  // Focus back to title for faster entry
   titleInput.focus();
 }
 
 // Event listener for Add Book button
 submitBtn.addEventListener('click', function(e) {
-  e.preventDefault(); // Prevent page reload if inside form
+  e.preventDefault(); // Prevent page reload
   addBook();
 });
 
 // Event delegation for Delete button
 bookList.addEventListener('click', function(e) {
   if (e.target.classList.contains('delete')) {
-    const row = e.target.closest('tr');
-    row.remove();
+    e.target.closest('tr').remove();
   }
 });
+
 
 
