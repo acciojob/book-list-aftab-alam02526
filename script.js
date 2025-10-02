@@ -1,12 +1,12 @@
 //your JS code here. If required.
-// Get references to inputs, form, and table
+// Get references to inputs and table
 const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
 const isbnInput = document.getElementById('isbn');
+const submitBtn = document.getElementById('submit');
 const bookList = document.getElementById('book-list');
-const form = document.getElementById('book-form');
 
-// Function to add a book row
+// Function to add a book
 function addBook() {
   const title = titleInput.value.trim();
   const author = authorInput.value.trim();
@@ -17,7 +17,7 @@ function addBook() {
     return;
   }
 
-  // Create a new table row
+  // Create new row
   const row = document.createElement('tr');
   row.innerHTML = `
     <td>${title}</td>
@@ -26,23 +26,30 @@ function addBook() {
     <td><button class="btn btn-danger btn-sm delete">Clear</button></td>
   `;
 
-  // Append the row to the table body
+  // Append row to table
   bookList.appendChild(row);
 
   // Clear input fields
-  form.reset();
+  titleInput.value = '';
+  authorInput.value = '';
+  isbnInput.value = '';
+
+  // Focus back to title input for convenience
+  titleInput.focus();
 }
 
-// Listen for form submission
-form.addEventListener('submit', function(e) {
-  e.preventDefault(); // Prevent page reload
+// Event listener for Add Book button
+submitBtn.addEventListener('click', function(e) {
+  e.preventDefault(); // Prevent page reload if inside form
   addBook();
 });
 
-// Event delegation for delete buttons
+// Event delegation for Delete button
 bookList.addEventListener('click', function(e) {
   if (e.target.classList.contains('delete')) {
-    e.target.closest('tr').remove();
+    const row = e.target.closest('tr');
+    row.remove();
   }
 });
+
 
