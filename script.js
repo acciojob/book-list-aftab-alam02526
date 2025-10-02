@@ -37,7 +37,8 @@ const titleInput = document.getElementById('title');
 
     // Event listener for submit button
     submitBtn.addEventListener('click', addBook);
-
+	e.preventDefault(); 
+	  addBook();
     // Event delegation for deleting a book
     bookList.addEventListener('click', function(e) {
       if (e.target.classList.contains('delete')) {
